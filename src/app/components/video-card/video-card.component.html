@@ -1,0 +1,23 @@
+<div fxFlex="20%">
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title flex-vert-center fxLayout.gt-xs="row" fxLayout.xs="column">
+      <mat-icon color="accent">favorite</mat-icon>
+      <span>{{Video.likes}}</span>
+      <mat-icon>favorite</mat-icon>
+      <span>{{Video.dislikes}}</span>
+      <mat-icon color="primary">remove_red_eye</mat-icon>
+      <span>{{Video.views}}</span>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <!-- {{Video.width}} x {{Video.heigth}} -->
+    </mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]='domSanitizer.bypassSecurityTrustUrl(Video.preview)' alt='preview of {{Video.title}}' (click)='openDialog()'/>
+<mat-card-content>
+    <span>{{Video.title}}</span>
+  </mat-card-content>
+  <mat-card-actions>
+  </mat-card-actions>
+</mat-card>
+</div>

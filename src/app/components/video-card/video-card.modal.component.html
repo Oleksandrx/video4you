@@ -1,0 +1,42 @@
+<!-- <h2 mat-dialog-title>{{data.video.title}}</h2> -->
+<div>
+    <mat-video
+      title={{data.video.title}}
+      [autoplay]="true"
+      loop="true"
+      [preload]="true"
+      [fullscreen]="true"
+      [download]="false"
+      color="accent"
+      spinner="spin"
+    >
+      <source matVideoSource src={{data.video.fullUrl}}  type="video/mp4">
+    </mat-video>
+</div>
+<div mat-dialog-actions>
+
+  <mat-icon
+    [attr.color]="'something'"
+    [color]="iconLikeColor"
+    (click)="onLikeClick()"
+
+  >
+    {{this.likeIcon}}
+  </mat-icon>
+  <mat-icon
+  [attr.color]="'something'"
+  [color]="iconDislikeColor"
+  (click)="onDislikeClick()"
+>
+  {{this.dislikeIcon}}
+</mat-icon>
+
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Close</button>
+</div>
+
+<!-- <mat-video style="min-height: 30%" quality="false" title="Title" loop="true" [autoplay]="true" [preload]="true" [fullscreen]="true" [download]="false" color="accent" spinner="spin">
+  <source matVideoSource src="assets/videos/samplevideo.mp4" type="video/mp4">
+  <source src="tutorial.webm" type="video/webm">
+  <track matVideoTrack src="subtitles_en.vtt" kind="subtitles" srclang="en" label="English">
+  <track src="subtitles_no.vtt" kind="subtitles" srclang="no" label="Norwegian">
+</mat-video> -->
