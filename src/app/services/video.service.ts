@@ -14,7 +14,7 @@ import { tap, catchError } from 'rxjs/operators';
 export class VideoService {
 
   private getVideoUrl = 'https://vi-host.com/api/videos';
-  private setVoteUrl = 'https://vi-host.com/api';
+  private apiUrl = 'https://vi-host.com/api';
 
   constructor(private http: HttpClient) { }
 
@@ -27,8 +27,11 @@ export class VideoService {
     };
   }
 
-  setVote(link: string) {
-    this.http.get(this.setVoteUrl + link);
+  setVote(link: string): Observable<any> {
+    return this.http.get<any>(this.apiUrl + link).pipe(
+      tap(() => console.log(`${link.split('/')[1]} for video id = ${link.split('/')[2]}`)),
+      catchError(this.handleError<Video>(`setVote id = ${link.split('/')[2]}`))
+    );
   }
 
   getVideos(): Observable<Video[]> {
@@ -45,5 +48,14 @@ export class VideoService {
     );
   }
 
+  getVideo(id: string): Observable<Video> {
+    const url = this.apiUrl + '/info/' + id;
+    console.log(url);
+
+    return this.http.get<Video>(url).pipe(
+      tap(() => console.log(`fetched video id = ${id}`)),
+      catchError(this.handleError<Video>(`getVideo id = ${id}`))
+    );
+  }
 
 }
