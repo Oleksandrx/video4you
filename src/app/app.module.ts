@@ -17,7 +17,12 @@ import { MatInputModule } from '@angular/material/input';
 
 
 // my components, services
-import { VideosComponent, VideoCardComponent, VideoCardModalComponent } from './components';
+import { VideosComponent,
+        VideoCardComponent,
+        VideoCardModalComponent,
+        CartoonsComponent,
+        MusicComponent,
+        FunComponent } from './components';
 import { VideoService } from './services';
 
 const matMmodules = [
@@ -41,7 +46,10 @@ const matMmodules = [
     SidenavComponent,
     VideosComponent,
     VideoCardComponent,
-    VideoCardModalComponent
+    VideoCardModalComponent,
+    CartoonsComponent,
+    MusicComponent,
+    FunComponent
   ],
   imports: [
     BrowserModule,

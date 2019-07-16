@@ -1,3 +1,3 @@
 <div class="videosWrapper" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
-  <app-video-card *ngFor="let video of videos; trackBy: trackByFn" [Video]="video"></app-video-card>
+  <app-video-card *ngFor="let item of cartoons; trackBy: trackByFn" [Video]="item"></app-video-card>
 </div>

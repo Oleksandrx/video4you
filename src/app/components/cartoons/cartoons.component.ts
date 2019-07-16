@@ -6,29 +6,29 @@ import { VideoService } from '../../services';
 import { Video } from '../../models';
 
 @Component({
-  selector: 'app-videos',
-  templateUrl: './videos.component.html',
-  styleUrls: ['./videos.component.scss']
+  selector: 'app-cartoons',
+  templateUrl: './cartoons.component.html',
+  styleUrls: ['../videos/videos.component.scss']
 })
+export class CartoonsComponent implements OnInit, OnDestroy {
 
-export class VideosComponent implements OnInit, OnDestroy {
-
-  videos: Video[];
+  cartoons: Video[];
   subscription: SubscriptionLike;
 
   constructor(private videoService: VideoService) { }
 
   ngOnInit() {
-    this.geVideos();
+    this.getCartoons();
   }
 
   trackByFn(index, item) {
     return item.id;
   }
 
-  geVideos(): any {
-    this.subscription = this.videoService.getVideos().subscribe(videos => {
-      this.videos = videos ? videos : [];
+  getCartoons(): void {
+    this.subscription = this.videoService.getVideosByCategory('anim').pipe(
+      ).subscribe(cartoons => {
+        this.cartoons = cartoons ? cartoons : [];
       });
   }
 

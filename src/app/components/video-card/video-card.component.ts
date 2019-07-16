@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, Input, Inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -16,55 +16,72 @@ export interface ModalData {
   templateUrl: './video-card.modal.component.html',
   styleUrls: ['./video-card.component.scss']
 })
-export class VideoCardModalComponent implements OnInit {
+export class VideoCardModalComponent {
 
   constructor(public dialogRef: MatDialogRef<VideoCardModalComponent>,
               @Inject(MAT_DIALOG_DATA) public data: ModalData,
               private videoService: VideoService) {}
 
-  public likeIcon = 'favorite_border';
-  public dislikeIcon = 'favorite_border';
-  public iconLikeColor = 'accent';
+  public iconLikeColor = '';
   public iconDislikeColor = '';
 
   public onLikeClick() {
-    if (this.data.like || this.data.dislike) {
+
+    if (this.data.like) {
+      this.data.like = !this.data.like;
+      this.iconLikeColor = '';
       return;
     }
-    this.likeIcon = 'favorite';
+
+    if (this.data.dislike) {
+      this.data.dislike = !this.data.dislike;
+      this.iconDislikeColor = '';
+    }
     this.iconLikeColor = 'accent';
-
     this.data.like = true;
-    this.videoService.setVote('/voteUp/' + this.data.video.link).subscribe( status => {
+
+    // this.videoService.setVote('/voteUp/' + this.data.video.link).subscribe( status => {
       // console.log(status);
-    });
+    // });
   }
 
-  public onDislikeClick() {
-    if (this.data.dislike || this.data.like) {
+    public onDislikeClick() {
+
+    if (this.data.dislike) {
+      this.data.dislike = !this.data.dislike;
+      this.iconDislikeColor = '';
       return;
     }
-    this.dislikeIcon = 'favorite';
 
+    if (this.data.like) {
+      this.data.like = !this.data.like;
+      this.iconLikeColor = '';
+    }
+    this.iconDislikeColor = 'primary';
     this.data.dislike = true;
-    this.videoService.setVote('/voteDown/' + this.data.video.link).subscribe( status => {
-      // console.log(status);
-    });
+
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  closeModal(): void {
+    if (this.data.like || this.data.dislike) {
+
+      const voteUpDown = this.data.like ? '/voteUp/' : '/voteDown/';
+      console.log(`link: ${voteUpDown + this.data.video.link}`);
+      this.videoService.setVote(voteUpDown + this.data.video.link).subscribe( status => {
+        // console.log(status);
+      });
+    }
   }
 
-  ngOnInit() {
-    // this.updateSize();
-  }
+  // onNoClick(): void {
+  //   this.dialogRef.close();
+  // }
 
-  updateSize() {
-    const widthModal = this.data.video.width + 50 + ' px';
-    const heightModal = this.data.video.heigth + 50 + ' px';
-    this.dialogRef.updateSize(widthModal, heightModal);
-  }
+  // ngOnInit() {
+  //   const widthModal = this.data.video.width + 50 + ' px';
+  //   const heightModal = this.data.video.heigth + 50 + ' px';
+  //   this.dialogRef.updateSize(widthModal, heightModal);
+  // }
 }
 
 @Component({

@@ -8,9 +8,12 @@
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item href="./">All video</a>
-      <a mat-list-item href="?cat=anim">Cartoons</a>
+      <a mat-list-item routerLinkActive="active" routerLink="/cartoons">Cartoons</a>
+      <a mat-list-item routerLinkActive="active" routerLink="/music">Music</a>
+      <a mat-list-item routerLinkActive="active" routerLink="/fun">Fun</a>
+      <!-- <a mat-list-item href="?cat=anim">Cartoons</a>
       <a mat-list-item href="?cat=music">Music</a>
-      <a mat-list-item href="?cat=fun">Fun</a>
+      <a mat-list-item href="?cat=fun">Fun</a> -->
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

@@ -6,29 +6,29 @@ import { VideoService } from '../../services';
 import { Video } from '../../models';
 
 @Component({
-  selector: 'app-videos',
-  templateUrl: './videos.component.html',
-  styleUrls: ['./videos.component.scss']
+  selector: 'app-music',
+  templateUrl: './music.component.html',
+  styleUrls: ['../videos/videos.component.scss']
 })
+export class MusicComponent implements OnInit, OnDestroy {
 
-export class VideosComponent implements OnInit, OnDestroy {
-
-  videos: Video[];
+  music: Video[];
   subscription: SubscriptionLike;
 
   constructor(private videoService: VideoService) { }
 
   ngOnInit() {
-    this.geVideos();
+    this.getMusic();
   }
 
   trackByFn(index, item) {
     return item.id;
   }
 
-  geVideos(): any {
-    this.subscription = this.videoService.getVideos().subscribe(videos => {
-      this.videos = videos ? videos : [];
+  getMusic() {
+    this.subscription = this.videoService.getVideosByCategory('music').pipe(
+      ).subscribe(music => {
+        this.music = music ? music : [];
       });
   }
 
@@ -39,3 +39,4 @@ export class VideosComponent implements OnInit, OnDestroy {
     }
   }
 }
+

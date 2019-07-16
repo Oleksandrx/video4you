@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
 import { Video } from '../models';
@@ -16,7 +17,7 @@ export class VideoService {
   private getVideoUrl = 'https://vi-host.com/api/videos';
   private apiUrl = 'https://vi-host.com/api';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
   // getVideos() { return this.http.get(this.videosUrl); }
 
@@ -58,4 +59,11 @@ export class VideoService {
     );
   }
 
+  getCategory() {
+    let category: string;
+    this.route.queryParams.subscribe(params => {
+      category = params['cat'];
+    });
+    return category;
+  }
 }
